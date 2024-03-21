@@ -22,6 +22,7 @@ cd Discord.Bot
 ```
 pip install discord.py
 pip install openai
+pip install mistralai
 ```
 
 ## Credits & Acknowledgments 👏
@@ -29,5 +30,5 @@ pip install openai
 - The YouTube tutorials:
 - [Build a Discord Bot with Python in 5 Minutes: Greetings and More!](https://youtu.be/BK9WQIu6Xcc).
 - [Unlocking AI: Create GPT-4 Chat Completions through OpenAI API with Python in 5 Minutes](https://youtu.be/vmiEUWIFDiA).
-
+- [Creating a Mistral AI API Service for Chat Completions with Python in 5 Minutes](https://youtu.be/unyywgvxd_0).
 
