@@ -28,7 +28,3 @@ class OpenAIService():
         ];
         chat_completion = self.simple_completion(messages)
         print(chat_completion)
-
-
-service = OpenAIService()
-service.simple_completion_test()
