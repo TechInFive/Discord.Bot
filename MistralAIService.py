@@ -29,6 +29,3 @@ class MistralAIService():
         chat_completion = self.simple_completion(messages)
         print(chat_completion)
 
-
-service = MistralAIService()
-service.simple_completion_test()

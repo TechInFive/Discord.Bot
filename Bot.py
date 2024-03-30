@@ -2,6 +2,8 @@ import os
 import random
 import discord
 
+from ChatService import ChatService
+
 # Jokes
 python_jokes = [
     "Why do Python programmers prefer dark mode? Because light attracts bugs.",
@@ -22,6 +24,11 @@ intents.message_content = True  # Enable message content
 # Initialize the client with the defined intents
 client = discord.Client(intents=intents)
 
+# Setting a custom prefix
+custom_prefix = "!"
+
+chat_service = ChatService()
+
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
@@ -32,15 +39,34 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    # Check if the bot is mentioned in the message
-    if client.user.mentioned_in(message):
-        # Reply with "Hello <author>"
-        await message.channel.send(f'Hello {message.author.name}!')
-        # await message.channel.send(f'Hello TechInFive!')
+    print(message.content)
+
+    if not message.content.startswith(custom_prefix):
+        return
 
     if message.content.startswith("!joke"):
         joke = random.choice(python_jokes)
-        print(joke)
         await message.channel.send(joke)
+    elif message.content == "!modelinfo":
+        model_info = (
+            "**AI Model Information:**\n"
+            "- OpenAI GPT-4: The latest generative model, ideal for complex queries.\n"
+            "- Mistral AI: Specialized in concise responses, perfect for quick facts."
+        )
+        await message.channel.send(model_info)
+    elif message.content == "!help":
+        help_text = (
+            "**Bot Commands:**\n"
+            "- `!openai <query>`: Get responses from OpenAI.\n"
+            "- `!mistral <query>`: Get responses from Mistral AI.\n"
+            "- `!joke`: Display a Python Joke.\n"
+            "- `!modelinfo`: Get information about the AI models.\n"
+            "- `!help`: Display this help message."
+        )
+        await message.channel.send(help_text)
+    else:
+        response_text = chat_service.handle_message(message.content)
+        if response_text != None:
+            await message.channel.send(response_text)
 
 client.run(BOT_TOKEN)
