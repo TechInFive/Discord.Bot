@@ -39,22 +39,41 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    print(message.content)
-
-    if not message.content.startswith(custom_prefix):
+    # Focus on text channels and public threads
+    if message.channel.type not in [discord.ChannelType.text, discord.ChannelType.public_thread]:
         return
 
-    if message.content.startswith("!joke"):
+    # Ignore unsupported message types
+    if message.type not in [discord.MessageType.default, discord.MessageType.reply]:
+        return
+
+    # text - Test message @ 845081847410065418
+    # private - Test DM @ 1219276778581790770
+    # public_thread - Test Thread Replay @ 1222276084905803908
+    # public_thread Test Reply of Thread Message @ 1222276084905803908
+    # text - Test - Reply Channel Message @ 845081847410065418
+    # text - Test - Reply Channel Message @ 845081847410065418
+    # text - Create new thread @ 845081847410065418
+    # public_thread - First message of new thread @ 1222285886998446201
+
+    # MessageType.default
+    # MessageType.reply
+    # MessageType.thread_created
+    
+    content = message.content
+    channel = message.channel
+
+    if content.startswith("!joke"):
         joke = random.choice(python_jokes)
-        await message.channel.send(joke)
-    elif message.content == "!modelinfo":
+        await channel.send(joke)
+    elif content == "!modelinfo":
         model_info = (
             "**AI Model Information:**\n"
             "- OpenAI GPT-4: The latest generative model, ideal for complex queries.\n"
             "- Mistral AI: Specialized in concise responses, perfect for quick facts."
         )
-        await message.channel.send(model_info)
-    elif message.content == "!help":
+        await channel.send(model_info)
+    elif content == "!help":
         help_text = (
             "**Bot Commands:**\n"
             "- `!openai <query>`: Get responses from OpenAI.\n"
@@ -63,10 +82,10 @@ async def on_message(message):
             "- `!modelinfo`: Get information about the AI models.\n"
             "- `!help`: Display this help message."
         )
-        await message.channel.send(help_text)
+        await channel.send(help_text)
     else:
-        response_text = chat_service.handle_message(message.content)
+        response_text = chat_service.handle_message(channel.id, content)
         if response_text != None:
-            await message.channel.send(response_text)
+            await channel.send(response_text)
 
 client.run(BOT_TOKEN)
