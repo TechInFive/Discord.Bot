@@ -30,5 +30,7 @@ pip install mistralai
 - The YouTube tutorials:
 - [Build a Discord Bot with Python in 5 Minutes: Greetings and More!](https://youtu.be/BK9WQIu6Xcc).
 - [Unlocking AI: Create GPT-4 Chat Completions through OpenAI API with Python in 5 Minutes](https://youtu.be/vmiEUWIFDiA).
-- [Creating a Mistral AI API Service for Chat Completions with Python in 5 Minutes](https://youtu.be/unyywgvxd_0).
-- [Integrating AI Services into Your Discord Bot with Python in 5 Minutes](https://youtu.be/Kt0gPiFY0zM).
+- [Create a Mistral AI API Service for Chat Completions with Python in 5 Minutes](https://youtu.be/unyywgvxd_0).
+- [Integrate AI Services into Your Discord Bot with Python in 5 Minutes](https://youtu.be/Kt0gPiFY0zM).
+- [Enable Conversational AI in Discord Bots with Python in 5 Minutes](https://youtu.be/0eKzb6ljz84).
+
