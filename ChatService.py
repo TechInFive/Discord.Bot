@@ -1,3 +1,4 @@
+from discord import Embed
 from MistralAIService import MistralAIService
 from OpenAIService import OpenAIService
 
@@ -48,3 +49,34 @@ class ChatService:
         conversations.append(ai_response)
 
         return response_content
+
+
+    def draw_image(self, message):
+        if not message.startswith("!dall-e"):
+            return None
+
+        message = message[len("!dall-e"):].strip()
+
+        chat_prompt = "Please create prompt for DALL-E 3. Requirement is : " + message
+        system_message = """Generate an improved prompt for an image description to be used with DALL-E 3.
+                         The prompt should be concise, evocative, and designed to yield visually compelling
+                         results. Do not provide explanations or additional context; focus only on creating
+                         the prompt itself."""
+
+        messages = [
+           {
+               "role": "system",
+               "content": system_message
+           },
+           {
+               "role": "user",
+                "content": chat_prompt
+           },
+        ]
+
+        response = self.openai_service.simple_completion(messages)
+        response_content = response.choices[0].message.content
+        print(response_content)
+
+        image_response = self.openai_service.draw_image(response_content, style="vivid")
+        return image_response.data[0].url
