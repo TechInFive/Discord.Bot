@@ -63,7 +63,7 @@ async def on_message(message):
     content = message.content
     channel = message.channel
 
-    if content.startswith("!joke"):
+    if content == "!joke":
         joke = random.choice(python_jokes)
         await channel.send(joke)
     elif content == "!modelinfo":
@@ -83,6 +83,20 @@ async def on_message(message):
             "- `!help`: Display this help message."
         )
         await channel.send(help_text)
+    elif content == "!permissions":
+        bot_member = message.guild.get_member(client.user.id)
+        perms_list = [f"{perm[0]}: {perm[1]}" for perm in bot_member.guild_permissions]
+        perms_str = "\n".join(perms_list)
+        await channel.send(f"Permissions for the bot:\n```\n{perms_str}\n```")
+
+        channel_permissions = channel.permissions_for(message.guild.me)
+        perms_list = [f"{perm[0]}: {perm[1]}" for perm in channel_permissions]
+        perms_str = "\n".join(perms_list)
+        await channel.send(f"Permissions in this channel:\n```\n{perms_str}\n```")
+
+    elif content.startswith("!dall-e"):
+        response_text = chat_service.draw_image(content)
+        await channel.send(response_text)
     else:
         response_text = chat_service.handle_message(channel.id, content)
         if response_text != None:
