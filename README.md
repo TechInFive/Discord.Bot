@@ -23,6 +23,9 @@ cd Discord.Bot
 pip install discord.py
 pip install openai
 pip install mistralai
+pip install pyaudio
+pip install playsound
+pip install pydub
 ```
 
 ## Credits & Acknowledgments 👏
@@ -33,4 +36,5 @@ pip install mistralai
 - [Create a Mistral AI API Service for Chat Completions with Python in 5 Minutes](https://youtu.be/unyywgvxd_0).
 - [Integrate AI Services into Your Discord Bot with Python in 5 Minutes](https://youtu.be/Kt0gPiFY0zM).
 - [Enable Conversational AI in Discord Bots with Python in 5 Minutes](https://youtu.be/0eKzb6ljz84).
+- [Audio Essentials: Capture and Playback with Python in 5 Minutes](https://youtu.be/wyeeYDKm7J4).
 
