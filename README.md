@@ -37,4 +37,5 @@ pip install pydub
 - [Integrate AI Services into Your Discord Bot with Python in 5 Minutes](https://youtu.be/Kt0gPiFY0zM).
 - [Enable Conversational AI in Discord Bots with Python in 5 Minutes](https://youtu.be/0eKzb6ljz84).
 - [Audio Essentials: Capture and Playback with Python in 5 Minutes](https://youtu.be/wyeeYDKm7J4).
+- [Enhance Audio Services by Whisper Integration with Python in 5 minutes.](https://youtu.be/xYzSNhhHeSc).
 
