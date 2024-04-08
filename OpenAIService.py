@@ -42,6 +42,45 @@ class OpenAIService():
 
         return response
 
+    def create_variant(self, image, size="1024x1024"):
+        response = self.client.images.create_variation(
+            image=image,
+            size=size,
+            n=1,
+        )
+
+        return response
+
+    def create_transcription(self, speech_file_path, prompt=None):
+        audio_file = open(speech_file_path, "rb")
+        response = self.client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio_file,
+            prompt=prompt
+        )
+
+        return response
+
+    def create_speech_file(self, voice, input, speech_file_path, response_format="mp3"):
+        # voice: alloy, echo, fable, onyx, nova, and shimmer
+        response = self.client.audio.speech.create(
+            model="tts-1",
+            voice=voice,
+            input=input,
+            response_format=response_format,
+        )
+
+        response.stream_to_file(speech_file_path)
+
+    def create_translation(self, speech_file_path):
+        audio_file = open(speech_file_path, "rb")
+        response = self.client.audio.translations.create(
+            model="whisper-1",
+            file=audio_file
+        )
+
+        return response
+
     def simple_completion_test(self):
         messages = [
             {
@@ -70,3 +109,14 @@ class OpenAIService():
         image_content = open(image_path, "rb")
         image_response = self.create_variant(image_content)
         print(image_response)
+
+    def create_speech_file_test(self, input, speech_file_path):
+        self.create_speech_file("echo", input, speech_file_path)
+
+    def create_transcription_test(self, speech_file_path):
+        response = self.create_transcription(speech_file_path)
+        print(response)
+
+    def create_translation_test(self, speech_file_path):
+        response = self.create_translation(speech_file_path)
+        print(response)
