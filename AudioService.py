@@ -1,4 +1,5 @@
 
+import threading
 from playsound import playsound
 from pydub import AudioSegment
 
@@ -11,6 +12,45 @@ RATE = 44100
 CHUNK = 1024
 
 class AudioService:
+    def __init__(self):
+        self.audio = None
+        self.frames = []
+        self.stream = None
+        self.is_recording = False
+
+    def start_recording(self, wav_file_path):
+        self.wav_file_path = wav_file_path
+        self.is_recording = True
+        self.frames = []
+        
+        self.audio = pyaudio.PyAudio()
+        self.stream = self.audio.open(format=FORMAT, channels=CHANNELS,
+                                      rate=RATE, input=True,
+                                      frames_per_buffer=CHUNK)
+        self.thread = threading.Thread(target=self._record)
+        self.thread.start()
+
+    def _record(self):
+        while self.is_recording:
+            data = self.stream.read(CHUNK, exception_on_overflow=False)
+            self.frames.append(data)
+    
+    def stop_recording(self):
+        self.is_recording = False
+        self.thread.join()
+        
+        self.stream.stop_stream()
+        self.stream.close()
+        
+        waveFile = wave.open(self.wav_file_path, 'wb')
+        waveFile.setnchannels(CHANNELS)
+        waveFile.setsampwidth(self.audio.get_sample_size(FORMAT))
+        waveFile.setframerate(RATE)
+        waveFile.writeframes(b''.join(self.frames))
+        waveFile.close()
+
+        self.audio.terminate()
+
     def record(self, record_seconds, wav_file_path):
         audio = pyaudio.PyAudio()
 
@@ -42,5 +82,9 @@ class AudioService:
 
     def play(self, sound_file_path):
         playsound(sound_file_path)
+
+
+
+
 
 
