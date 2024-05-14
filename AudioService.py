@@ -13,7 +13,7 @@ CHUNK = 1024
 
 class AudioService:
     def __init__(self):
-        self.audio = None
+        self.audio = pyaudio.PyAudio()
         self.frames = []
         self.stream = None
         self.is_recording = False
@@ -23,7 +23,6 @@ class AudioService:
         self.is_recording = True
         self.frames = []
         
-        self.audio = pyaudio.PyAudio()
         self.stream = self.audio.open(format=FORMAT, channels=CHANNELS,
                                       rate=RATE, input=True,
                                       frames_per_buffer=CHUNK)
@@ -50,6 +49,8 @@ class AudioService:
         waveFile.close()
 
         self.audio.terminate()
+        self.audio = None
+        self.audio = pyaudio.PyAudio()
 
     def record(self, record_seconds, wav_file_path):
         audio = pyaudio.PyAudio()
