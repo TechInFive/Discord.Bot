@@ -40,5 +40,7 @@ pip install pydub
 - [Enhance Audio Services by Whisper Integration with Python in 5 Minutes](https://youtu.be/xYzSNhhHeSc).
 - [Create an Interactive Dashboard using Tkinter in Python in 5 Minutes](https://youtu.be_9h-8IpR_OA).
 - [Build a Dynamic AI Audio Interaction Dashboard with Python in 5 Minutes](https://youtu.be/6SIBQdpu3Cg).
-- [Create AI-Powered Voice Interactions  with Discord Bots with Python in 5 Minutes](https://youtu.be/lYvXQau1l18).
+- [Create AI-Powered Voice Interactions with Discord Bots with Python in 5 Minutes](https://youtu.be/lYvXQau1l18).
 - [Full Demo: Dynamic Voice and Text Interaction with Discord Bots in 5 Minutes](https://youtu.be/xa5NcUxUkaA).
+
+- [Unlock OpenAI GPT-4o's Vision Capabilities in 5 Minutes: Real-Time Webcam Image Analysis in Python](https://youtu.be/qsG7QWlO8eE).

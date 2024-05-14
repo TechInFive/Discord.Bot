@@ -10,7 +10,8 @@ class OpenAIService():
 
         # model: https://platform.openai.com/docs/models/gpt-3-5-turbo
         # model: https://platform.openai.com/docs/models/gpt-4-and-gpt-4-turbo
-        self.model = "gpt-4-turbo-preview"
+        # model: https://platform.openai.com/docs/models/gpt-4o
+        self.model = "gpt-4o"
 
     def simple_completion(self, messages):
         chat_completion = self.client.chat.completions.create(
