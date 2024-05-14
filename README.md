@@ -26,6 +26,8 @@ pip install mistralai
 pip install pyaudio
 pip install playsound
 pip install pydub
+pip install opencv-python
+pip install pillow
 ```
 
 ## Credits & Acknowledgments 👏
